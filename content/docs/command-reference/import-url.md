@@ -11,7 +11,7 @@ changes in the remote data source. Creates a `.dvc` file.
 
 ```usage
 usage: dvc import-url [-h] [-q | -v] [--file <filename>] [--no-exec]
-                      [--desc <text>]
+                      [--to-remote] [-r <name>] [--desc <text>]
                       url [out]
 
 positional arguments:
@@ -22,8 +22,9 @@ positional arguments:
 ## Description
 
 In some cases it's convenient to add a data file or directory from a remote
-location into the workspace, such that it can be updated later, if/when the
-external data source changes. Example scenarios:
+location into the workspace (or to the
+[remote storage](/doc/command-reference/remote)), such that it can be updated
+later, if/when the external data source changes. Example scenarios:
 
 - A remote system may produce occasional data files that are used in other
   projects.
@@ -36,7 +37,9 @@ external data source changes. Example scenarios:
 The `dvc import-url` command helps the user create such an external data
 dependency without having to manually copying files from the supported remote
 locations (listed below), which may require installing a different tool for each
-type.
+type. In case of the dataset is too big to handle, when used with `--to-remote`
+option, it can directly transfer the data in the remote location into the remote
+storage and track it so that it can be pulled when having the means to store it.
 
 The `url` argument specifies the external location of the data to be imported,
 while `out` can be used to specify the directory and/or file name desired for
@@ -130,6 +133,12 @@ source.
   and download everything later (with `dvc update`); or if the target data
   already exist locally and you want to "DVCfy" this state of the project (see
   also `dvc commit`).
+
+- `--to-remote` - imports data into the remote storage, instead of the local
+  <abbr>workspace</abbr>.
+
+- `-r <name>`, `--remote <name>` - name of the
+  [remote storage](/doc/command-reference/remote)
 
 - `--desc <text>` - user description of the data (optional). This doesn't  
   affect any DVC operations.
