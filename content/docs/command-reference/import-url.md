@@ -1,8 +1,9 @@
 # import-url
 
 Download a file or directory from a supported URL (for example `s3://`,
-`ssh://`, and other protocols) into the <abbr>workspace</abbr>, and track
-changes in the remote data source. Creates a `.dvc` file.
+`ssh://`, and other protocols) into either the <abbr>workspace</abbr> or to a
+remote storage (when combined with `--to-remote`), and track changes in the
+remote data source. Creates a `.dvc` file.
 
 > See `dvc import` to download and tack data/model files or directories from
 > other <abbr>DVC repositories</abbr> (e.g. hosted on GitHub).
@@ -116,9 +117,9 @@ $ dvc run -n download_data \
 `dvc import-url` generates an _import stage_ `.dvc` file and `dvc run` a regular
 stage (in `dvc.yaml`).
 
-⚠️ DVC won't push or pull imported data to/from
-[remote storage](/doc/command-reference/remote), it will rely on it's original
-source.
+⚠️ When not combined with `--to-remote`, DVC won't push or pull imported data
+to/from [remote storage](/doc/command-reference/remote), it will rely on it's
+original source.
 
 ## Options
 
